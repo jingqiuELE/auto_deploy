@@ -20,7 +20,7 @@ if (typeof process.env.HUGO_SRC == 'undefined'
      || typeof process.env.HUGO_DES == 'undefined') {
     console.error('Please define HUGO_SRC and HUGO_DES in the environment.');
 } else {
-    http.listen(3000, function () {
-        console.log('listening on *:3000');
+    http.listen(3000, 'localhost', function () {
+        console.log('listening on localhost:3000');
     });
 }
