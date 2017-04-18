@@ -3,10 +3,11 @@ var http = require('http').Server(app);
 var shell = require('shelljs');
 var request = require('request');
 
-app.post('/', function (req, res) {
+app.post('/refresh', function (req, res) {
     shell.exec("git -C $HUGO_SRC pull", function (code, stdout, stderr) {
         if (code == 0) {
             if (stdout.search("Already up-to-date.") == -1) {
+                shell.exec("rm -rf $HUGO_DES/*");
                 shell.exec("hugo -d $HUGO_DES -s $HUGO_SRC");
             } else {
                 res.send(stdout);
